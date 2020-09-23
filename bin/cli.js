@@ -40,15 +40,13 @@ if (config.mapper && typeof config.mapper === 'string') {
 if (config.couch) config.database = config.couch + '/' + config.database
 
 // allow elasticsearch to be the root url of elasticsearch, and indexName be just the index
-// and indexType be the type
 // config.elasticsearch = http://elastic.place.com:9200
 // config.indexName = idx-edm-v5
-// config.indexType = listing
 // join them together to make the complete url
-if (config.indexName && config.indexType) config.elasticsearch = config.elasticsearch + '/' + config.indexName + '/' + config.indexType
+if (config.indexName) config.elasticsearch = config.elasticsearch + '/' + config.indexName
 
 var index_name = url.parse(config.elasticsearch).pathname.split('/')[1]
-config.seq_url = url.resolve(config.elasticsearch, '/' + index_name + '/_mapping/seq')
+config.seq_url = url.resolve(config.elasticsearch, '/' + index_name + '/_mapping')
 
 var log = getLogFile(config)
 if (config._[0] === 'id') {
@@ -117,7 +115,7 @@ function getSince (config, index_name, cb) {
   jsonist.get(config.seq_url, function (err, data) {
     if (err) return cb(err)
     if (!data[index_name]) return cb('index name does not match')
-    var seq = selectn('mappings.seq._meta.seq', data[index_name])
+    var seq = selectn('mappings._meta.seq', data[index_name])
     if (!seq) return cb('no seq number in elasticsearch at ' + config.seq_url)
     return cb(null, seq)
   })

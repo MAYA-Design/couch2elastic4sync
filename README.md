@@ -16,7 +16,7 @@ npm install couch2elastic4sync -g
 [rc](http://npm.im/rc) is used to set to variables. For example, create a .couch2elastic4sync file with the following
 ```ini
 database=http://localhost:5984/idx-edm-v5
-elasticsearch=http://elastic-1.com:9200/idx-edm-v5/listing
+elasticsearch=http://elastic-1.com:9200/idx-edm-v5
 ```
 
 or pass the config file path explicity
@@ -28,7 +28,7 @@ Alternatively, the config file can be in JSON
 ```json
 {
   "database": "http://localhost:5984/idx-edm-v5",
-  "elasticsearch": "http://elastic-1.com:9200/idx-edm-v5/listing"
+  "elasticsearch": "http://elastic-1.com:9200/idx-edm-v5"
 }
 ```
 
@@ -38,7 +38,6 @@ couch=http://localhost:5984
 database=idx-edm-v5
 elasticsearch=http://elastic-1.com:9200
 indexName=idx-edm-v5
-indexType=listing
 ```
 
 ### Load documents
@@ -78,7 +77,7 @@ couch2elastic4sync cleanup
 A `mapper` function can be passed from the config to format documents before being put to ElasticSearch:
 ```ini
 database=http://localhost:5984/idx-edm-v5
-elasticsearch=http://elastic-1.com:9200/idx-edm-v5/listing
+elasticsearch=http://elastic-1.com:9200/idx-edm-v5
 mapper=path/to/my-mapper.js
 ```
 
